@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atualizar Usuário</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="date"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        select {
+            cursor: pointer;
+        }
+        .button-group {
+            text-align: center;
+            margin-top: 30px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+        .required {
+            color: red;
+        }
+        .btn-delete {
+            background-color: #721c24;
+        }
+        .erro {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .sucesso {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .id-field {
+            background-color: #f8f9fa;
+        }
+        
+        .id-field input {
+            background-color: #e9ecef;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Atualizar Usuário</h1>
+        
+        <form id="atualizarForm" method="POST" action="/atualizar_usuario">
+            <div class="form-group id-field">
+                <label for="id">ID do Usuário <span class="required">*</span></label>
+                <input type="number" id="id" name="id" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="nome">Nome <span class="required">*</span></label>
+                <input type="text" id="nome" name="nome" required>
+            </div>
+
+            <div class="form-group">
+                <label for="matricula">Matrícula <span class="required">*</span></label>
+                <input type="text" id="matricula" name="matricula" required>
+            </div>
+
+            <div class="form-group">
+                <label for="tipo">Tipo <span class="required">*</span></label>
+                <select id="tipo" name="tipo" required>
+                    <option value="">Selecione o tipo</option>
+                    <option value="ALUNO">Aluno</option>
+                    <option value="PROFESSOR">Professor</option>
+                    <option value="FUNCIONARIO">Funcionário</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email <span class="required">*</span></label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="ativoDeRegistro">Data de Registro <span class="required">*</span></label>
+                <input type="date" id="ativoDeRegistro" name="ativoDeRegistro" required>
+            </div>
+
+            <div class="form-group">
+                <label for="status">Status <span class="required">*</span></label>
+                <select id="status" name="status" required>
+                    <option value="">Selecione o status</option>
+                    <option value="ATIVO">Ativo</option>
+                    <option value="INATIVO">Inativo</option>
+                    <option value="SUSPENSO">Suspenso</option>
+                </select>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" name="btn_atualizar" value="atualizar">Atualizar</button>
+                <button type="submit" name="btn_excluir" value="excluir" class="btn-delete">Deletar</button>
+                <button type="button" class="btn-secondary" onclick="window.location.href='/usuarios'">Voltar</button>
+            </div>
+        </form>
+    </div>
+
+    <!--MENSAGEM_ERRO-->
+    <!--MENSAGEM_SUCESSO-->
+    <!-- Dados -->
+
+    <script>
+        document.getElementById('atualizarForm').addEventListener('submit', function(e) {
+            const userId = document.getElementById('id').value;
+            if (userId) {
+                this.action = `/atualizar_usuario?id=${userId}`;
+            }
+        });
+    </script>
+</body>
+</html>
